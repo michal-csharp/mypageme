@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "badge": "👋 Dostupný pro nové projekty",
+    "title": "Frontend Developer",
+    "titleAccent": "& Designer",
+    "description": "Tvořím digitální zážitky v Olomouci. Specializuji se na moderní webové aplikace a UI design.",
+    "heroPhoto": ""
+  },
+  "about": {
+    "bioTitle": "Ahoj!",
+    "bioText": "Jsem frontend developer s vášní pro čistý kód a moderní design. Miluji vyvíjet rychlé, responzivní aplikace, které poskytují skvělý uživatelský zážitek. Pracuji s nejnovějšími technologiemi a rád se učím nové věci.",
+    "fastTitle": "Fast",
+    "fastText": "Rychlé načítání a optimalizovaný výkon jsou moje priority",
+    "skills": ["React & Next.js", "TypeScript", "Tailwind CSS", "Figma", "UI/UX Design", "Responsive Design"],
+    "aboutPhoto": ""
+  },
+  "social": {
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com"
+  },
+  "contact": {
+    "email": "hello@example.com",
+    "title": "Pojďme společně",
+    "titleAccent": "vytvořit něco skvělého",
+    "subtitle": "Máte zajímavý projekt nebo hledáte spolupráci? Napište mi!"
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "E-commerce Dashboard",
+      "description": "Komplexní administrační rozhraní pro správu online obchodu",
+      "tech": ["Next.js", "TypeScript", "Tailwind"],
+      "size": "large"
+    },
+    {
+      "id": "2",
+      "title": "Weather App",
+      "description": "Minimalistická aplikace pro sledování počasí",
+      "tech": ["React", "API", "CSS"],
+      "size": "medium"
+    },
+    {
+      "id": "3",
+      "title": "Portfolio Generator",
+      "description": "Nástroj pro rychlé vytváření portfolio stránek",
+      "tech": ["Next.js", "Framer Motion"],
+      "size": "medium"
+    },
+    {
+      "id": "4",
+      "title": "Task Manager",
+      "description": "Moderní aplikace pro správu úkolů a projektů s real-time synchronizací",
+      "tech": ["React", "Firebase", "Tailwind"],
+      "size": "wide"
+    }
+  ]
+}
