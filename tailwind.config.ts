@@ -15,6 +15,13 @@ const config: Config = {
         accent: "#3b82f6",
         "accent-dark": "#2563eb",
         muted: "#6b7280",
+
+        // --- TOTO JSOU PŘIDANÉ ŘÁDKY PRO OPRAVU CHYBY ---
+        border: "#2e2e2e",      // Tmavě šedá pro rámečky
+        input: "#2e2e2e",       // Barva pro input pole
+        ring: "#3b82f6",        // Barva pro focus (použil jsem vaši accent barvu)
+        foreground: "#ffffff",  // Pro jistotu textová barva
+        // ------------------------------------------------
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-in-out",
