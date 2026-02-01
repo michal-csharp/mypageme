@@ -1,25 +1,23 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import * as storage from "@/lib/storage";
 import type { Article } from "@/lib/data";
-
-const DATA_FILE = path.join(process.cwd(), "data", "articles.json");
 
 export async function GET(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    const articles: Article[] = JSON.parse(
-      await fs.readFile(DATA_FILE, "utf-8")
-    );
+    const articles = await storage.getArticles();
     const article = articles.find((a) => a.id === params.id);
     if (!article) {
       return NextResponse.json({ error: "Article not found" }, { status: 404 });
     }
     return NextResponse.json(article);
   } catch {
-    return NextResponse.json({ error: "Failed to read articles" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to read articles" },
+      { status: 500 }
+    );
   }
 }
 
@@ -28,9 +26,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const articles: Article[] = JSON.parse(
-      await fs.readFile(DATA_FILE, "utf-8")
-    );
+    const articles = await storage.getArticles();
     const index = articles.findIndex((a) => a.id === params.id);
     if (index === -1) {
       return NextResponse.json({ error: "Article not found" }, { status: 404 });
@@ -43,7 +39,7 @@ export async function PUT(
       updatedAt: new Date().toISOString(),
     };
     articles[index] = updated;
-    await fs.writeFile(DATA_FILE, JSON.stringify(articles, null, 2), "utf-8");
+    await storage.setArticles(articles);
     return NextResponse.json(updated);
   } catch (err) {
     return NextResponse.json(
@@ -58,18 +54,12 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const articles: Article[] = JSON.parse(
-      await fs.readFile(DATA_FILE, "utf-8")
-    );
+    const articles = await storage.getArticles();
     const filtered = articles.filter((a) => a.id !== params.id);
     if (filtered.length === articles.length) {
       return NextResponse.json({ error: "Article not found" }, { status: 404 });
     }
-    await fs.writeFile(
-      DATA_FILE,
-      JSON.stringify(filtered, null, 2),
-      "utf-8"
-    );
+    await storage.setArticles(filtered);
     return NextResponse.json({ success: true });
   } catch (err) {
     return NextResponse.json(

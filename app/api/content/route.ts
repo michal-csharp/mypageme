@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import * as storage from "@/lib/storage";
+import { getContent } from "@/lib/data";
 import type { ContentData } from "@/lib/data";
-
-const DATA_FILE = path.join(process.cwd(), "data", "content.json");
 
 export async function GET() {
   try {
-    const json = await fs.readFile(DATA_FILE, "utf-8");
-    const data = JSON.parse(json);
+    // getContent() vrací z storage nebo fallback na data/content.json
+    const data = await getContent();
     return NextResponse.json(data);
   } catch (err) {
     return NextResponse.json(
@@ -21,7 +19,7 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const body: ContentData = await request.json();
-    await fs.writeFile(DATA_FILE, JSON.stringify(body, null, 2), "utf-8");
+    await storage.setContent(body);
     return NextResponse.json({ success: true });
   } catch (err) {
     return NextResponse.json(

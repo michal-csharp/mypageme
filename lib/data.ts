@@ -1,7 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
+import * as storage from "./storage";
 
 const DATA_DIR = path.join(process.cwd(), "data");
+const CONTENT_FILE = path.join(DATA_DIR, "content.json");
+const ARTICLES_FILE = path.join(DATA_DIR, "articles.json");
 
 export interface ContentData {
   hero: {
@@ -49,18 +52,28 @@ export interface Article {
   updatedAt: string;
 }
 
-export async function getContent(): Promise<ContentData> {
-  const filePath = path.join(DATA_DIR, "content.json");
-  const json = await fs.readFile(filePath, "utf-8");
+async function getDefaultContent(): Promise<ContentData> {
+  const json = await fs.readFile(CONTENT_FILE, "utf-8");
   return JSON.parse(json);
 }
 
-export async function getArticles(): Promise<Article[]> {
-  const filePath = path.join(DATA_DIR, "articles.json");
+async function getDefaultArticles(): Promise<Article[]> {
   try {
-    const json = await fs.readFile(filePath, "utf-8");
+    const json = await fs.readFile(ARTICLES_FILE, "utf-8");
     return JSON.parse(json);
   } catch {
     return [];
   }
+}
+
+export async function getContent(): Promise<ContentData> {
+  const data = await storage.getContent();
+  if (data) return data;
+  return getDefaultContent();
+}
+
+export async function getArticles(): Promise<Article[]> {
+  const data = await storage.getArticles();
+  if (data && data.length > 0) return data;
+  return getDefaultArticles();
 }

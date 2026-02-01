@@ -1,18 +1,10 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import * as storage from "@/lib/storage";
 import type { Article } from "@/lib/data";
-
-const DATA_FILE = path.join(process.cwd(), "data", "articles.json");
-
-function getArticlesPath() {
-  return DATA_FILE;
-}
 
 export async function GET() {
   try {
-    const json = await fs.readFile(getArticlesPath(), "utf-8");
-    const articles: Article[] = JSON.parse(json);
+    const articles = await storage.getArticles();
     return NextResponse.json(articles);
   } catch {
     return NextResponse.json([]);
@@ -21,14 +13,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const articles: Article[] = JSON.parse(
-      await fs.readFile(getArticlesPath(), "utf-8")
-    );
+    const articles = await storage.getArticles();
     const body = await request.json();
     const id = Date.now().toString();
     const slug =
       body.slug ||
-      body.title
+      (body.title || "")
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
@@ -36,7 +26,7 @@ export async function POST(request: Request) {
     const newArticle: Article = {
       id,
       title: body.title || "Bez názvu",
-      slug,
+      slug: slug || id,
       excerpt: body.excerpt || "",
       content: body.content || "",
       photos: body.photos || [],
@@ -44,11 +34,7 @@ export async function POST(request: Request) {
       updatedAt: now,
     };
     articles.push(newArticle);
-    await fs.writeFile(
-      getArticlesPath(),
-      JSON.stringify(articles, null, 2),
-      "utf-8"
-    );
+    await storage.setArticles(articles);
     return NextResponse.json(newArticle);
   } catch (err) {
     return NextResponse.json(
