@@ -79,7 +79,7 @@ export default function AboutSection({ skills }: AboutSectionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="bg-surface p-8 rounded-3xl border border-surface-light hover:border-accent/30 transition-colors"
+            className="bg-gradient-to-br from-accent/20 to-accent/5 p-8 rounded-3xl border border-accent/20"
           >
             <h3 className="text-xl font-bold mb-4">Najdi mě</h3>
             <div className="flex flex-col gap-4">
