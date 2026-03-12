@@ -47,12 +47,12 @@ export default function Home() {
   ];
 
   const skills = [
-    { name: "React & Next.js", level: 95 },
-    { name: "TypeScript", level: 90 },
-    { name: "Tailwind CSS", level: 92 },
-    { name: "UI/UX Design", level: 85 },
-    { name: "Node.js", level: 80 },
-    { name: "Git & CI/CD", level: 82 },
+    { name: "React & Next.js", level: 75 },
+    { name: "TypeScript", level: 70 },
+    { name: "Tailwind CSS", level: 72 },
+    { name: "C#", level: 68 },
+    { name: "Node.js", level: 60 },
+    { name: "Git & CI/CD", level: 62 },
   ];
 
   const codeSnippet = [
