@@ -9,23 +9,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        surface: "#141414",
-        "surface-light": "#1e1e1e",
-        accent: "#3b82f6",
-        "accent-dark": "#2563eb",
-        muted: "#6b7280",
-
-        // --- TOTO JSOU PŘIDANÉ ŘÁDKY PRO OPRAVU CHYBY ---
-        border: "#2e2e2e",      // Tmavě šedá pro rámečky
-        input: "#2e2e2e",       // Barva pro input pole
-        ring: "#3b82f6",        // Barva pro focus (použil jsem vaši accent barvu)
-        foreground: "#ffffff",  // Pro jistotu textová barva
-        // ------------------------------------------------
+        background: "#09090b",
+        surface: "#12121a",
+        "surface-light": "#1c1c27",
+        accent: "#10b981",
+        "accent-dark": "#059669",
+        "accent-secondary": "#06b6d4",
+        muted: "#71717a",
+        border: "#27272a",
+        input: "#27272a",
+        ring: "#10b981",
+        foreground: "#fafafa",
+      },
+      fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },
       animation: {
-        "fade-in": "fadeIn 0.6s ease-in-out",
+        "fade-in": "fadeIn 0.6s ease-out",
         "slide-up": "slideUp 0.5s ease-out",
+        "gradient": "gradient 8s ease infinite",
+        "pulse-slow": "pulse 4s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -35,6 +39,10 @@ const config: Config = {
         slideUp: {
           "0%": { transform: "translateY(20px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        gradient: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
         },
       },
     },
