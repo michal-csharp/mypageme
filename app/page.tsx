@@ -44,6 +44,16 @@ export default function Home() {
       label: "Demo",
       icon: <Monitor size={20} />,
     },
+    {
+      id: 3,
+      title: "www.apartmanpeklicko.cz",
+      description:
+        "Web pro apartmánové ubytování zaměřený na jasnou prezentaci, fotogalerii, důležité informace pro hosty a rychlý kontakt na rezervaci.",
+      tech: ["Prezentační web", "Responsive", "SEO", "Konverzní UX"],
+      url: "https://www.apartmanpeklicko.cz",
+      label: "Live",
+      icon: <Monitor size={20} />,
+    },
   ];
 
   const skills = [
